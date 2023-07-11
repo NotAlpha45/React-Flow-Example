@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import ReactFlow, { Controls, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant } from 'reactflow'
+import ReactFlow, { Controls, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant, NodeChange } from 'reactflow'
 // import { initialEdges, initialNodes } from '../../stores/slices/nodes-edges';
 import 'reactflow/dist/style.css';
 import { useAppSelector } from '../../stores/redux-store';
@@ -20,7 +20,6 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     const nodes = useAppSelector(state => state.graph.nodes, shallowEqual);
     const edges = useAppSelector(state => state.graph.edges, shallowEqual);
-    const onNodesChange = useAppSelector(state => state.graph.onNodesChange, shallowEqual);
 
     // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -60,6 +59,11 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     }
 
+    const handleNodeMovement = (changes: NodeChange[]) => {
+
+        dispatch(GraphSliceActions.onNodesChange(changes));
+    }
+
 
     useEffect(() => {
         // setLayout();
@@ -75,7 +79,7 @@ export default function GraphComponent(props: GraphComponentProps) {
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
-                    onNodesChange={onNodesChange}
+                    onNodesChange={handleNodeMovement}
                     fitView
                 >
                     <Panel position="top-right">

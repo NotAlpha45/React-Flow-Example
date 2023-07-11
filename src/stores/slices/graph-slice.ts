@@ -13,7 +13,6 @@ import { initialEdges, initialNodes } from "./nodes-edges";
 export interface GraphStateType {
   nodes: Node[];
   edges: Edge[];
-  onNodesChange?: OnNodesChange;
 }
 
 type GraphActionType = {
@@ -27,11 +26,15 @@ type GraphActionType = {
 const initialGraphState: GraphStateType = {
   nodes: initialNodes ?? [],
   edges: initialEdges ?? [],
+<<<<<<< Updated upstream
+=======
   onNodesChange: function (changes: NodeChange[]) {
-    console.log("onNodesChange", changes);
-
-    this.nodes = applyNodeChanges(changes, this.nodes);
+    console.log("onNodesChange", this);
+    if (this?.nodes) {
+      this.nodes = applyNodeChanges(changes, this.nodes);
+    }
   },
+>>>>>>> Stashed changes
 };
 
 const graphSlice = createSlice({
@@ -60,6 +63,14 @@ const graphSlice = createSlice({
 
     setEdges(state: GraphStateType, action: PayloadAction<Edge[]>) {
       state.edges = action.payload;
+    },
+    onNodesChange: (
+      state: GraphStateType,
+      action: PayloadAction<NodeChange[]>
+    ) => {
+      console.log("onNodesChange", action.payload);
+
+      state.nodes = applyNodeChanges(action.payload, state.nodes);
     },
 
     onEdgesChange: (
