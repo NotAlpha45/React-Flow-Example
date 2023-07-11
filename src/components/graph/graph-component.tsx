@@ -21,6 +21,24 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     const reactFlowInstance = useReactFlow();
 
+    const dummyNode: Node = {
+        id: '69',
+        data: { label: 'dummy' },
+        position: { x: 0, y: 0 },
+    }
+
+    const dummyEdge: Edge = {
+        id: '169',
+        source: '2',
+        target: '69',
+        animated: true,
+    }
+
+    const addConnection = (node: Node, edge: Edge) => {
+        setNodes([...nodes, node]);
+        setEdges([...edges, edge]);
+    }
+
     const setLayout = useCallback(
         () => {
             const { nodes: layoutedNodes, edges: layoutedEdges } = props.layoutFunction(nodes, edges, { rankdir: 'LR' });
@@ -55,6 +73,7 @@ export default function GraphComponent(props: GraphComponentProps) {
                 >
                     <Panel position="top-right">
                         <button type='button' onClick={setLayout}>Reset Layout</button>
+                        <button type='button' onClick={() => { addConnection(dummyNode, dummyEdge) }}>Add Connection</button>
                     </Panel>
                     <Controls />
                     <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
