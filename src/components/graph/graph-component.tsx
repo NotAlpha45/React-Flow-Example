@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from 'react'
 import ReactFlow, { Controls, MiniMap, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant } from 'reactflow'
-import { initialEdges, initialNodes } from '../../stores/nodes-edges';
+import { initialEdges, initialNodes } from '../../stores/slices/nodes-edges';
 import 'reactflow/dist/style.css';
 
 interface GraphComponentProps {
 
-    layoutFunction: (nodes: Node[], edges: Edge[], options?: {
-        direction: any;
+    layoutFunction: (nodes: Node[], edges: Edge[], options: {
+        rankdir: string;
     }) => {
         nodes: Node[];
         edges: Edge[];
@@ -23,7 +23,7 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     const setLayout = useCallback(
         () => {
-            const { nodes: layoutedNodes, edges: layoutedEdges } = props.layoutFunction(nodes, edges);
+            const { nodes: layoutedNodes, edges: layoutedEdges } = props.layoutFunction(nodes, edges, { rankdir: 'LR' });
 
             setNodes([...layoutedNodes]);
             setEdges([...layoutedEdges]);
