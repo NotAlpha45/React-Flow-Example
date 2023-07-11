@@ -1,12 +1,11 @@
-import { tree } from 'd3-hierarchy'
-import React, { useCallback, useEffect } from 'react'
-import ReactFlow, { Controls, MiniMap, NodeChange, ReactFlowProps, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant } from 'reactflow'
+import { useCallback, useEffect } from 'react'
+import ReactFlow, { Controls, MiniMap, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant } from 'reactflow'
 import { initialEdges, initialNodes } from '../../stores/nodes-edges';
 import 'reactflow/dist/style.css';
 
 interface GraphComponentProps {
 
-    layoutFunction: (nodes: Node[], edges: Edge[], options: {
+    layoutFunction: (nodes: Node[], edges: Edge[], options?: {
         direction: any;
     }) => {
         nodes: Node[];
@@ -23,13 +22,8 @@ export default function GraphComponent(props: GraphComponentProps) {
     const reactFlowInstance = useReactFlow();
 
     const setLayout = useCallback(
-        (direction: any) => {
-            const { nodes: layoutedNodes, edges: layoutedEdges } = props.layoutFunction(nodes, edges, {
-                direction,
-            });
-
-            console.log(layoutedNodes, layoutedEdges);
-
+        () => {
+            const { nodes: layoutedNodes, edges: layoutedEdges } = props.layoutFunction(nodes, edges);
 
             setNodes([...layoutedNodes]);
             setEdges([...layoutedEdges]);
@@ -42,11 +36,10 @@ export default function GraphComponent(props: GraphComponentProps) {
     );
 
     useEffect(() => {
-        setLayout("LR");
-        reactFlowInstance.fitView();
+        setLayout();
         console.log("fit view");
 
-    }, [])
+    }, [reactFlowInstance])
 
 
     return (
@@ -58,13 +51,12 @@ export default function GraphComponent(props: GraphComponentProps) {
                     edges={edges}
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
-                    fitView={true}
+                    fitView
                 >
                     <Panel position="top-right">
-                        <button type='button' onClick={setLayout}>layout</button>
+                        <button type='button' onClick={setLayout}>Reset Layout</button>
                     </Panel>
                     <Controls />
-                    <MiniMap />
                     <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
                 </ReactFlow>
             </div>
