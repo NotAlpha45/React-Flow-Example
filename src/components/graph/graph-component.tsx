@@ -20,16 +20,12 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     const nodes = useAppSelector(state => state.graph.nodes, shallowEqual);
     const edges = useAppSelector(state => state.graph.edges, shallowEqual);
-
-    // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
     const reactFlowInstance = useReactFlow();
     const dispatch = useDispatch();
 
     const dummyNode: Node = {
         id: '69',
-        data: { label: 'dummy' },
+        data: { label: 'dummy', color: '#4FD1C5' },
         position: { x: 0, y: 0 },
     }
 
@@ -38,13 +34,6 @@ export default function GraphComponent(props: GraphComponentProps) {
         source: '2',
         target: '69',
         animated: true,
-    }
-
-    const addConnection = (node: Node, edge: Edge) => {
-        // setNodes(nodes => [...nodes, node]);
-        // setEdges(edges => [...edges, edge]);
-        dispatch(GraphSliceActions.addNodes([node]));
-        dispatch(GraphSliceActions.addEdges([edge]));
     }
 
     const setLayout = () => {
@@ -59,6 +48,11 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     }
 
+    const addConnection = (node: Node, edge: Edge) => {
+        dispatch(GraphSliceActions.addConnection({ node, edge }));
+        // setLayout();
+    }
+
     const handleNodeMovement = (changes: NodeChange[]) => {
 
         dispatch(GraphSliceActions.onNodesChange(changes));
@@ -66,7 +60,7 @@ export default function GraphComponent(props: GraphComponentProps) {
 
 
     useEffect(() => {
-        // setLayout();
+        setLayout();
         console.log("fit view");
 
     }, [reactFlowInstance])

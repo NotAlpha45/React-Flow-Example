@@ -16,7 +16,7 @@ export interface GraphStateType {
 }
 
 type GraphActionType = {
-  type: string;
+  type?: string;
   payload: {
     node: Node;
     edge: Edge;
@@ -33,11 +33,8 @@ const graphSlice = createSlice({
   initialState: initialGraphState,
   reducers: {
     addConnection: (state: GraphStateType, action: GraphActionType) => {
-      state = {
-        ...state,
-        nodes: [...state.nodes, action.payload.node],
-        edges: [...state.edges, action.payload.edge],
-      };
+      state.nodes = [...state.nodes, action.payload.node];
+      state.edges = [...state.edges, action.payload.edge];
     },
 
     addNodes: (state: GraphStateType, action: PayloadAction<Node[]>) => {
@@ -55,12 +52,11 @@ const graphSlice = createSlice({
     setEdges(state: GraphStateType, action: PayloadAction<Edge[]>) {
       state.edges = action.payload;
     },
+
     onNodesChange: (
       state: GraphStateType,
       action: PayloadAction<NodeChange[]>
     ) => {
-      console.log("onNodesChange", action.payload);
-
       state.nodes = applyNodeChanges(action.payload, state.nodes);
     },
 
