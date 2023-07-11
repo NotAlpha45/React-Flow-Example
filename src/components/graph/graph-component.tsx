@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import ReactFlow, { Controls, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant, NodeChange } from 'reactflow'
 // import { initialEdges, initialNodes } from '../../stores/slices/nodes-edges';
 import 'reactflow/dist/style.css';
 import { useAppSelector } from '../../stores/redux-store';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { GraphSliceActions } from '../../stores/slices/graph-slice';
+import NodeComponent from '../node/node-component';
 
 interface GraphComponentProps {
 
@@ -16,12 +17,19 @@ interface GraphComponentProps {
     }
 }
 
+
+
 export default function GraphComponent(props: GraphComponentProps) {
 
     const nodes = useAppSelector(state => state.graph.nodes, shallowEqual);
     const edges = useAppSelector(state => state.graph.edges, shallowEqual);
     const reactFlowInstance = useReactFlow();
     const dispatch = useDispatch();
+
+    const renderNodeObject = useMemo(() => (
+        { renderNode: NodeComponent }
+    ), []);
+
 
     const dummyNode: Node = {
         id: '69',
@@ -50,7 +58,7 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     const addConnection = (node: Node, edge: Edge) => {
         dispatch(GraphSliceActions.addConnection({ node, edge }));
-        // setLayout();
+
     }
 
     const handleNodeMovement = (changes: NodeChange[]) => {
@@ -75,6 +83,7 @@ export default function GraphComponent(props: GraphComponentProps) {
                     edges={edges}
                     onNodesChange={handleNodeMovement}
                     fitView
+                    nodeTypes={renderNodeObject}
                 >
                     <Panel position="top-right">
                         <button type='button' onClick={setLayout}>Reset Layout</button>
