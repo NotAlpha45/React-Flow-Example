@@ -4,14 +4,17 @@ import { HierarchyPointNode, stratify, tree } from 'd3-hierarchy';
 
 export default function GraphDisplayer() {
 
-    const graphLayout = tree()
 
-    const getLayoutedElements = (nodes: Node[], edges: Edge[], options: { direction: any; }) => {
+
+    const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
+
+        const graphLayout = tree()
+
         if (nodes.length === 0) return { nodes, edges };
 
         const { width, height } = document
             ?.querySelector(`[data-id="${nodes[0].id}"]`)
-            ?.getBoundingClientRect() || { width: 0, height: 0 };
+            ?.getBoundingClientRect() ?? { width: 0, height: 0 };
 
         const hierarchy = stratify()
             .id((node: any) => node.id)

@@ -1,6 +1,6 @@
 import { Node, Edge } from "reactflow";
 
-type NodeData = {
+export interface NodeDataType extends Node {
   id: string;
   type: string;
   data: {
@@ -10,14 +10,11 @@ type NodeData = {
     x: number;
     y: number;
   };
-};
+}
 
-type EdgeData = {
+export type EdgeDataType = {
   id: string;
   source: string;
   target: string;
   animated: boolean;
-};
-
-export type NodeType = Node<NodeData>;
-export type EdgeType = Edge<EdgeData>;
+} & Edge;

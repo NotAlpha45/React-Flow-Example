@@ -42,11 +42,11 @@ export default function GraphComponent(props: GraphComponentProps) {
     );
 
     useEffect(() => {
-        setLayout('LR');
-        console.log(nodes, edges);
+        setLayout("LR");
+        reactFlowInstance.fitView();
+        console.log("fit view");
 
     }, [])
-
 
 
     return (
@@ -58,15 +58,15 @@ export default function GraphComponent(props: GraphComponentProps) {
                     edges={edges}
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
-                // fitView
+                    fitView={true}
                 >
                     <Panel position="top-right">
                         <button type='button' onClick={setLayout}>layout</button>
                     </Panel>
+                    <Controls />
+                    <MiniMap />
+                    <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
                 </ReactFlow>
-                <Controls />
-                <MiniMap />
-                <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
             </div>
         </>
     )

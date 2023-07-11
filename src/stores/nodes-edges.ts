@@ -1,5 +1,4 @@
 import { Edge, Node } from "reactflow";
-import { EdgeType, NodeType } from "../types/graph_types/node-type";
 
 export const initialNodes = [
   {
