@@ -15,3 +15,9 @@ export const SelectedNodeStyle2 = {
   border: "4px solid orange",
   width: 180,
 };
+
+export const SelectedNodeStyle3 = {
+  background: "white",
+  border: "4px solid green",
+  width: 180,
+};

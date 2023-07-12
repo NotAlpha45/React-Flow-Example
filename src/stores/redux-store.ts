@@ -1,10 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { GraphReducer } from "./slices/graph-slice";
-import {
-  TypedUseSelectorHook,
-  createSelectorHook,
-  useDispatch,
-} from "react-redux";
+import { TypedUseSelectorHook, createSelectorHook } from "react-redux";
 
 const appReducer = combineReducers({
   graph: GraphReducer,

@@ -1,7 +1,4 @@
-import {
-  SelectedNodeStyle1,
-  SelectedNodeStyle2,
-} from "../../stores/constants/graph-style-constants";
+import { SelectedNodeStyle2 } from "../../stores/constants/graph-style-constants";
 import { appStore } from "../../stores/redux-store";
 import { GraphLayoutUtils } from "./graph-layout-utils";
 import { Node } from "reactflow";
