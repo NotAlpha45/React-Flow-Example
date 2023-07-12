@@ -1,13 +1,11 @@
-import { useEffect, useMemo } from 'react'
-import ReactFlow, { Controls, useReactFlow, Node, Edge, Background, Panel, BackgroundVariant, NodeChange } from 'reactflow'
-// import { initialEdges, initialNodes } from '../../stores/slices/nodes-edges';
+import { useEffect } from 'react'
+import ReactFlow, { Controls, useReactFlow, Node, Edge, Background, Panel, BackgroundVariant } from 'reactflow'
 import 'reactflow/dist/style.css';
 import { useAppSelector } from '../../stores/redux-store';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { GraphSliceActions } from '../../stores/slices/graph-slice';
-import NodeComponent from '../node/node-component';
 import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils';
-import { SelectedNodeStyle } from '../../stores/constants/graph-style-constants';
+import { SelectedNodeStyle1 } from '../../stores/constants/graph-style-constants';
 import { GraphControlUtils } from '../../utils/graph-utils/graph-control-utils';
 import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils';
 
@@ -34,7 +32,7 @@ export default function GraphComponent(props: GraphComponentProps) {
         id: '69',
         data: { label: 'dummy', color: '#4FD1C5' },
         position: { x: 0, y: 0 },
-        style: SelectedNodeStyle
+        style: SelectedNodeStyle1
     }
 
     const dummyEdge: Edge = {
@@ -79,9 +77,10 @@ export default function GraphComponent(props: GraphComponentProps) {
                     fitView
                 >
                     <Panel position="top-right">
-                        <button type='button' onClick={() => { setLayout(); GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Nodes</button>
-                        <button type='button' onClick={() => { addConnection(dummyNode, dummyEdge) }}>Add Connection</button>
-                        <button type='button' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing 2</button>
+                        <button type='button' onClick={() => { setLayout() }}>Reset Layout</button>
+                        <button type='button' onClick={() => { GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Selection</button>
+                        <button type='button' onClick={() => { GraphSearchUtils.findChildNodes("2") }}>Select Child Nodes of 2</button>
+                        <button type='button' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing "2"</button>
                     </Panel>
                     <Controls />
                     <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

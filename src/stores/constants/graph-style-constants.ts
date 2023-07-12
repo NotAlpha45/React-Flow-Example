@@ -4,8 +4,14 @@ export const DefaultNodeStyle = {
   width: 180,
 };
 
-export const SelectedNodeStyle = {
+export const SelectedNodeStyle1 = {
   background: "white",
   border: "4px solid red",
+  width: 180,
+};
+
+export const SelectedNodeStyle2 = {
+  background: "white",
+  border: "4px solid orange",
   width: 180,
 };
