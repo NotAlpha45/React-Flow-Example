@@ -21,9 +21,6 @@ export default function GraphComponent(props: GraphComponentProps) {
     const nodes = useAppSelector(state => state.graph.nodes, shallowEqual);
     const edges = useAppSelector(state => state.graph.edges, shallowEqual);
 
-    // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
     const reactFlowInstance = useReactFlow();
     const dispatch = useDispatch();
 
@@ -41,8 +38,6 @@ export default function GraphComponent(props: GraphComponentProps) {
     }
 
     const addConnection = (node: Node, edge: Edge) => {
-        // setNodes(nodes => [...nodes, node]);
-        // setEdges(edges => [...edges, edge]);
         dispatch(GraphSliceActions.addNodes([node]));
         dispatch(GraphSliceActions.addEdges([edge]));
     }
@@ -66,9 +61,7 @@ export default function GraphComponent(props: GraphComponentProps) {
 
 
     useEffect(() => {
-        // setLayout();
-        console.log("fit view");
-
+        setLayout();
     }, [reactFlowInstance])
 
 

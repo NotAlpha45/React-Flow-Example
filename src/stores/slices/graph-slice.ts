@@ -59,8 +59,6 @@ const graphSlice = createSlice({
       state: GraphStateType,
       action: PayloadAction<NodeChange[]>
     ) => {
-      console.log("onNodesChange", action.payload);
-
       state.nodes = applyNodeChanges(action.payload, state.nodes);
     },
 
