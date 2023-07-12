@@ -1,12 +1,12 @@
 import { ReactFlowProvider } from 'reactflow'
 import GraphComponent from './graph-component'
-import { GraphUtils } from '../../assets/utils/graph-utils/graph-utils';
+import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils';
 
 export default function GraphDisplayer() {
 
 
 
-    const layoutFunction = GraphUtils.d3LayoutMaker;
+    const layoutFunction = GraphLayoutUtils.d3LayoutMaker;
 
 
     return (
