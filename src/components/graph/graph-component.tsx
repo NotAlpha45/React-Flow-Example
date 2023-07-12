@@ -69,8 +69,6 @@ export default function GraphComponent(props: GraphComponentProps) {
 
     useEffect(() => {
         setLayout();
-        console.log("fit view");
-
     }, [reactFlowInstance])
 
 

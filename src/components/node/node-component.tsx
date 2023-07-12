@@ -8,8 +8,6 @@ type NodeComponentProps = {
 
 function NodeComponent(props: NodeProps<NodeComponentProps>) {
 
-    console.log("here");
-
     return (
         <div style={{ backgroundColor: props.data?.color || "white", borderRadius: 10 }}>
             <Handle type="target" position={Position.Top} />
