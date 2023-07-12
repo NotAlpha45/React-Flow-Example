@@ -1,11 +1,15 @@
 import { useEffect, useMemo } from 'react'
-import ReactFlow, { Controls, useReactFlow, Node, Edge, useNodesState, useEdgesState, Background, Panel, BackgroundVariant, NodeChange } from 'reactflow'
+import ReactFlow, { Controls, useReactFlow, Node, Edge, Background, Panel, BackgroundVariant, NodeChange } from 'reactflow'
 // import { initialEdges, initialNodes } from '../../stores/slices/nodes-edges';
 import 'reactflow/dist/style.css';
 import { useAppSelector } from '../../stores/redux-store';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { GraphSliceActions } from '../../stores/slices/graph-slice';
 import NodeComponent from '../node/node-component';
+import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils';
+import { SelectedNodeStyle } from '../../stores/constants/graph-style-constants';
+import { GraphControlUtils } from '../../utils/graph-utils/graph-control-utils';
+import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils';
 
 interface GraphComponentProps {
 
@@ -26,15 +30,11 @@ export default function GraphComponent(props: GraphComponentProps) {
     const reactFlowInstance = useReactFlow();
     const dispatch = useDispatch();
 
-    const renderNodeObject = useMemo(() => (
-        { renderNode: NodeComponent }
-    ), []);
-
-
     const dummyNode: Node = {
         id: '69',
         data: { label: 'dummy', color: '#4FD1C5' },
         position: { x: 0, y: 0 },
+        style: SelectedNodeStyle
     }
 
     const dummyEdge: Edge = {
@@ -59,16 +59,12 @@ export default function GraphComponent(props: GraphComponentProps) {
     const addConnection = (node: Node, edge: Edge) => {
         dispatch(GraphSliceActions.addConnection({ node, edge }));
 
+
     }
-
-    const handleNodeMovement = (changes: NodeChange[]) => {
-
-        dispatch(GraphSliceActions.onNodesChange(changes));
-    }
-
 
     useEffect(() => {
         setLayout();
+        GraphLayoutUtils.setDefaultNodeStyle();
     }, [reactFlowInstance])
 
 
@@ -79,13 +75,13 @@ export default function GraphComponent(props: GraphComponentProps) {
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
-                    onNodesChange={handleNodeMovement}
+                    onNodesChange={GraphControlUtils.handleNodeMove}
                     fitView
-                    nodeTypes={renderNodeObject}
                 >
                     <Panel position="top-right">
-                        <button type='button' onClick={setLayout}>Reset Layout</button>
+                        <button type='button' onClick={() => { setLayout(); GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Nodes</button>
                         <button type='button' onClick={() => { addConnection(dummyNode, dummyEdge) }}>Add Connection</button>
+                        <button type='button' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing 2</button>
                     </Panel>
                     <Controls />
                     <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

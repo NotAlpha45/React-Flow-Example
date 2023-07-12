@@ -1,8 +1,65 @@
 import { HierarchyPointNode, stratify, tree } from "d3-hierarchy";
 import { Node, Edge } from "reactflow";
 import Dagree from "@dagrejs/dagre";
+import {
+  DefaultNodeStyle,
+  SelectedNodeStyle,
+} from "../../stores/constants/graph-style-constants";
+import { appStore } from "../../stores/redux-store";
+import { GraphSliceActions } from "../../stores/slices/graph-slice";
 
-export class GraphUtils {
+export class GraphLayoutUtils {
+  static setDefaultNodeStyle(nodes: Node[] = appStore.getState().graph.nodes) {
+    const newNodes = nodes.map((node: Node) => {
+      return {
+        ...node,
+        style: DefaultNodeStyle,
+      };
+    });
+
+    appStore.dispatch(GraphSliceActions.setNodes(newNodes));
+  }
+
+  static setSelectedNodeColor(
+    nodeId: string,
+    nodes: Node[] = appStore.getState().graph.nodes
+  ) {
+    const newNodes = nodes.map((node: Node) => {
+      if (node.id === nodeId) {
+        return {
+          ...node,
+          style: SelectedNodeStyle,
+        };
+      }
+
+      return node;
+    });
+
+    console.log("newNodes", newNodes);
+
+    appStore.dispatch(GraphSliceActions.setNodes(newNodes));
+  }
+
+  static setBulkSelectedNodeColors(
+    selectedNodes: Node[],
+    nodes: Node[] = appStore.getState().graph.nodes
+  ) {
+    const newNodes = nodes.map((node: Node) => {
+      if (selectedNodes.find((selectedNode) => selectedNode.id === node.id)) {
+        return {
+          ...node,
+          style: SelectedNodeStyle,
+        };
+      }
+
+      return node;
+    });
+
+    console.log("newNodes", newNodes);
+
+    appStore.dispatch(GraphSliceActions.updateNodes(newNodes));
+  }
+
   static d3LayoutMaker(nodes: Node[], edges: Edge[]) {
     const graphLayout = tree();
 
