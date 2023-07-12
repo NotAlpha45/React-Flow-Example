@@ -26,15 +26,6 @@ type GraphActionType = {
 const initialGraphState: GraphStateType = {
   nodes: initialNodes ?? [],
   edges: initialEdges ?? [],
-<<<<<<< Updated upstream
-=======
-  onNodesChange: function (changes: NodeChange[]) {
-    console.log("onNodesChange", this);
-    if (this?.nodes) {
-      this.nodes = applyNodeChanges(changes, this.nodes);
-    }
-  },
->>>>>>> Stashed changes
 };
 
 const graphSlice = createSlice({
