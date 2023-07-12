@@ -54,13 +54,13 @@ export default function GraphComponent(props: GraphComponentProps) {
                     onNodesChange={GraphControlUtils.handleNodeMove}
                     fitView
                 >
-                    <Panel position="top-right">
-                        <button type='button' onClick={() => { setLayout() }}>Reset Layout</button>
-                        <button type='button' onClick={() => { GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Selection</button>
-                        <button type='button' onClick={() => { GraphSearchUtils.findChildNodes("2") }}>Select Child Nodes of 2</button>
-                        <button type='button' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing "2"</button>
+                    <Panel position="top-right" className='bg-gray-500 rounded-md'>
+                        <button type='button' className='bg-white text-black m-2' onClick={() => { setLayout() }}>Reset Layout</button>
+                        <button type='button' className='bg-white text-black m-2' onClick={() => { GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Selection</button>
+                        <button type='button' className='bg-white text-black m-2' onClick={() => { GraphSearchUtils.findChildNodes("2") }}>Select Child Nodes of 2</button>
+                        <button type='button' className='bg-white text-black m-2' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing "2"</button>
                     </Panel>
-                    <Controls />
+                    <Controls className='bg-white text-black p-1 rounded-md' />
                     <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
                 </ReactFlow>
             </div>

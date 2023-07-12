@@ -20,8 +20,6 @@ export class GraphSearchUtils {
       return node.data.label.includes(nodeLabel);
     });
 
-    console.log("selectedNodes", selectedNodes);
-
     GraphLayoutUtils.setBulkSelectedNodeStyles(selectedNodes, nodes);
 
     return selectedNodes;
