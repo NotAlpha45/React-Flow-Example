@@ -6,15 +6,13 @@ export default function GraphDisplayer() {
 
 
 
-    const layoutFunction = GraphLayoutUtils.d3LayoutMaker;
+    const layoutFunction = GraphLayoutUtils.dagreeLayoutMaker;
 
 
     return (
         <>
             <ReactFlowProvider>
-                <GraphComponent
-                    layoutFunction={layoutFunction}
-                />
+                <GraphComponent />
             </ReactFlowProvider>
         </>
     )
