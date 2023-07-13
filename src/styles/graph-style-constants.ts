@@ -1,3 +1,5 @@
+import { MarkerType } from "reactflow";
+
 export const DefaultNodeStyle = {
   background: "white",
   border: "4px solid lightblue",
@@ -23,4 +25,23 @@ export const SelectedNodeStyle3 = {
   border: "4px solid green",
   fonsize: "medium",
   fontWeight: "bold",
+};
+
+export const EdgeStyle1 = {
+  markerEnd: {
+    type: MarkerType.ArrowClosed,
+    width: 15,
+    height: 15,
+    color: "#FF0072",
+  },
+  markerStart: {
+    type: MarkerType.ArrowClosed,
+    width: 15,
+    height: 15,
+    color: "#FF0072",
+  },
+  style: {
+    strokeWidth: 2,
+    stroke: "#FF0072",
+  },
 };

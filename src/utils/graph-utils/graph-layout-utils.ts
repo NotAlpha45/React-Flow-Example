@@ -4,7 +4,7 @@ import Dagre from "@dagrejs/dagre";
 import {
   DefaultNodeStyle,
   SelectedNodeStyle1,
-} from "../../stores/constants/graph-style-constants";
+} from "../../styles/graph-style-constants";
 import { appStore } from "../../stores/redux-store";
 import { GraphSliceActions } from "../../stores/slices/graph-slice";
 
