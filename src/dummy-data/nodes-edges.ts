@@ -49,6 +49,11 @@ export const initialNodes = [
     data: { label: "node 3b" },
     position: { x: 202, y: 100 },
   },
+  {
+    id: "3c",
+    data: { label: "node 3c" },
+    position: { x: 202, y: 100 },
+  },
 ] as Node[];
 
 export const initialEdges = [
@@ -61,4 +66,5 @@ export const initialEdges = [
 
   { id: "33a", source: "3", target: "3a", animated: true },
   { id: "33b", source: "3", target: "3b", animated: true },
+  { id: "33c", source: "3", target: "3c", animated: true },
 ] as Edge[];

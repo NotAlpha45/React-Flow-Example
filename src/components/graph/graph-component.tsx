@@ -32,7 +32,7 @@ export default function GraphComponent() {
     useEffect(() => {
         setLayout();
         GraphLayoutUtils.setDefaultNodeStyle();
-    }, [selectedLayout])
+    }, [selectedLayout, reactFlowInstance])
 
 
     return (

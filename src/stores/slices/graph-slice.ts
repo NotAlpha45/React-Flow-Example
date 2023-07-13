@@ -8,7 +8,7 @@ import {
   applyEdgeChanges,
   OnNodesChange,
 } from "reactflow";
-import { initialEdges, initialNodes } from "./nodes-edges";
+import { initialEdges, initialNodes } from "../../dummy-data/nodes-edges";
 
 export interface GraphStateType {
   nodes: Node[];
