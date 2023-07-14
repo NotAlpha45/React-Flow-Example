@@ -1,10 +1,10 @@
 import { HierarchyPointNode, stratify, tree } from "d3-hierarchy";
-import { Node, Edge } from "reactflow";
-import Dagree from "@dagrejs/dagre";
+import { Node, Edge, Position } from "reactflow";
+import Dagre from "@dagrejs/dagre";
 import {
   DefaultNodeStyle,
   SelectedNodeStyle1,
-} from "../../stores/constants/graph-style-constants";
+} from "../../styles/graph-style-constants";
 import { appStore } from "../../stores/redux-store";
 import { GraphSliceActions } from "../../stores/slices/graph-slice";
 
@@ -93,25 +93,51 @@ export class GraphLayoutUtils {
   static dagreeLayoutMaker(
     nodes: Node[],
     edges: Edge[],
-    options: { rankdir: string }
+    options: { rankdir: "LR" | "TB" }
   ): { nodes: Node[]; edges: Edge[] } {
-    const graphLayout = new Dagree.graphlib.Graph();
+    const isHorizontal = options.rankdir === "LR";
+
+    const graphLayout = new Dagre.graphlib.Graph();
 
     graphLayout.setGraph(options);
 
-    edges.forEach((edge) => graphLayout.setEdge(edge?.source, edge?.target));
-    nodes.forEach((node) => graphLayout.setNode(node?.id, node));
+    // You need to set default node and edges for dagre, otherwise it may result in unexpected behaviour
+    graphLayout.setDefaultEdgeLabel(() => ({}));
+    graphLayout.setDefaultNodeLabel(() => ({}));
 
-    Dagree.layout(graphLayout);
+    edges.forEach((edge) => graphLayout.setEdge(edge?.source, edge?.target));
+    nodes.forEach((node) => graphLayout.setNode(node?.id, {})); // Pass an empty object so that it is used to make the nodes
+
+    Dagre.layout(graphLayout);
 
     const repositionedNodes = nodes.map((node: Node) => {
-      const dagreeNode = graphLayout.node(node.id);
+      const repositionedNode = graphLayout.node(node.id);
+
+      const nodeSourcePosition = isHorizontal
+        ? Position.Right
+        : Position.Bottom;
+
+      const nodeTargetPosition = isHorizontal ? Position.Left : Position.Top;
+
+      // This will automatically move the connecting point position according to the layout direction
+      node = {
+        ...node,
+        sourcePosition: nodeSourcePosition,
+        targetPosition: nodeTargetPosition,
+      };
 
       return {
         ...node,
-        position: { x: dagreeNode.x, y: dagreeNode.y },
+        position: {
+          x: repositionedNode.x * 4,
+          y: repositionedNode.y * 2,
+        },
       };
     });
+
+    // console.log(repositionedNodes);
+
+    // console.log(repositionedNodes);
 
     return {
       nodes: repositionedNodes,
