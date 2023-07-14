@@ -1,6 +1,32 @@
-import { Entity, OwnerShip } from "../types/entity-types";
+import { Entity } from "../types/entity-types";
 
-export const entities: Entity[] = [
+export const initialEntities: Entity[] = [
+  {
+    self: {
+      entityId: "master",
+      entityName: "Master",
+      incorporationJurisdiction: "US",
+      entityType: "Corporation",
+      subNational: "US",
+      sicCode: "1234",
+    },
+    ownerships: [
+      {
+        ownershipId: "master-1",
+        ownerId: "master",
+        ownedId: "1",
+        ownershipName: "Master",
+        ownershipPercentage: 50,
+      },
+      {
+        ownershipId: "master-2",
+        ownerId: "master",
+        ownedId: "3",
+        ownershipName: "Master",
+        ownershipPercentage: 50,
+      },
+    ],
+  },
   {
     self: {
       entityId: "1",
@@ -29,15 +55,7 @@ export const entities: Entity[] = [
       subNational: "US",
       sicCode: "1234",
     },
-    ownerships: [
-      {
-        ownershipId: "2",
-        ownerId: "2",
-        ownedId: "2",
-        ownershipName: "Entity 2",
-        ownershipPercentage: 70,
-      },
-    ],
+    ownerships: [],
   },
   {
     self: {
@@ -56,6 +74,13 @@ export const entities: Entity[] = [
         ownershipName: "Entity 3",
         ownershipPercentage: 100,
       },
+      {
+        ownershipId: "4",
+        ownerId: "3",
+        ownedId: "2",
+        ownershipName: "Entity 3",
+        ownershipPercentage: 70,
+      },
     ],
   },
   {
@@ -69,7 +94,7 @@ export const entities: Entity[] = [
     },
     ownerships: [
       {
-        ownershipId: "4",
+        ownershipId: "5",
         ownerId: "4",
         ownedId: "5",
         ownershipName: "Entity 4",

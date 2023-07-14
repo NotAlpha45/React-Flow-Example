@@ -1,60 +1,60 @@
 import { Edge, MarkerType, Node } from "reactflow";
 import { EdgeStyle1 } from "../styles/graph-style-constants";
 
-const defaultPosition = { x: 0, y: 0 };
+export const defaultNodePosition = { x: 0, y: 0 };
 
 export const initialNodes = [
   {
     id: "1",
     data: { label: "input" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "2",
     data: { label: "node 2" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "2a",
     data: { label: "node 2a" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "2b",
     data: { label: "node 2b" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "2c",
     data: { label: "node 2c" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "2d",
     data: { label: "node 2d" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "3",
     data: { label: "node 3" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
 
   {
     id: "3a",
     data: { label: "node 3a" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
 
   {
     id: "3b",
     data: { label: "node 3b" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
   {
     id: "3c",
     data: { label: "node 3c" },
-    position: defaultPosition,
+    position: defaultNodePosition,
   },
 ] as Node[];
 

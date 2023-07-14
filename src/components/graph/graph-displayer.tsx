@@ -1,18 +1,21 @@
 import { ReactFlowProvider } from 'reactflow'
 import GraphComponent from './graph-component'
-import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils';
+import { useEffect } from 'react';
+import { EntityConverter } from '../../utils/entity-utils/entity-conversion-util';
 
 export default function GraphDisplayer() {
 
-
-
-    const layoutFunction = GraphLayoutUtils.dagreeLayoutMaker;
+    useEffect(() => {
+        EntityConverter.convertEntitiesToGraph();
+    }, [])
 
 
     return (
         <>
             <ReactFlowProvider>
-                <GraphComponent />
+                <div style={{ width: '100vw', height: '100vh' }}>
+                    <GraphComponent />
+                </div>
             </ReactFlowProvider>
         </>
     )

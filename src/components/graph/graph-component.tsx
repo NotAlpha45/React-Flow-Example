@@ -7,6 +7,7 @@ import { GraphSliceActions } from '../../stores/slices/graph-slice';
 import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils';
 import { GraphControlUtils } from '../../utils/graph-utils/graph-control-utils';
 import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils';
+import { EntityConverter } from '../../utils/entity-utils/entity-conversion-util';
 
 
 export default function GraphComponent() {
@@ -30,14 +31,17 @@ export default function GraphComponent() {
     }
 
     useEffect(() => {
+
         setLayout();
         GraphLayoutUtils.setDefaultNodeStyle();
     }, [selectedLayout, reactFlowInstance])
 
 
+
+
     return (
         <>
-            <div style={{ width: '100vw', height: '100vh' }}>
+
 
                 <ReactFlow
                     nodes={nodes}
@@ -56,7 +60,7 @@ export default function GraphComponent() {
                     <Controls className='bg-white text-black p-1 rounded-md' />
                     <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
                 </ReactFlow>
-            </div>
+
         </>
     )
 
