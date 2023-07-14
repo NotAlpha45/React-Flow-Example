@@ -93,6 +93,7 @@ export const initialEdges = [
   },
   {
     id: "e22c",
+    label: "edge 2 to 2c",
     source: "2",
     target: "2c",
     animated: true,
