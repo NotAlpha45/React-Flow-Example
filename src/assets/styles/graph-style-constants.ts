@@ -25,7 +25,7 @@ export const SelectedNodeStyle2 = {
 
 export const SelectedNodeStyle3 = {
   background: "white",
-  border: "4px solid green",
+  border: "4px solid yellow",
   fonsize: "medium",
   fontWeight: "bold",
   width: "fit-content",

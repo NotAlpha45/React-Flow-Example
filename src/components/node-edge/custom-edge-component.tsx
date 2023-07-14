@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
+import { FunctionComponent } from 'react';
 import { EdgeProps, getBezierPath, EdgeLabelRenderer, BaseEdge } from 'reactflow';
-import { EdgeStyle1 } from '../../assets/styles/graph-style-constants';
 
-const CustomEdgeComponent: FC<EdgeProps> = ({
+const CustomEdgeComponent: FunctionComponent<EdgeProps> = ({
     id,
     sourceX,
     sourceY,

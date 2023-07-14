@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import ReactFlow, { Controls, useReactFlow, Node, Edge, Background, Panel, BackgroundVariant, EdgeTypes } from 'reactflow'
+import ReactFlow, { Controls, useReactFlow, Background, Panel, BackgroundVariant } from 'reactflow'
 import 'reactflow/dist/style.css';
 import { useAppSelector } from '../../stores/redux-store';
 import { shallowEqual, useDispatch } from 'react-redux';
@@ -55,7 +55,7 @@ export default function GraphComponent() {
                     <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { setSelectedLayout("LR") }}>Horizontal Layout</button>
                     <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { setLayout() }}>Reset Layout</button>
                     <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Selection</button>
-                    <button type='button' className='bg-white text-black m-2 border-yellow-500 border-4' onClick={() => { GraphSearchUtils.findChildNodes("2") }}>Select Child Nodes of 2</button>
+                    <button type='button' className='bg-white text-black m-2 border-yellow-300 border-4' onClick={() => { GraphSearchUtils.findNodesByOwnershipPercentage(50, "3"); }}>Select Nodes With 50% Ownership</button>
                     <button type='button' className='bg-white text-black m-2 border-red-700 border-4' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing "2"</button>
                 </Panel>
                 <Controls className='bg-white text-black p-1 rounded-md' />

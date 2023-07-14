@@ -30,6 +30,10 @@ export class EntityConverter {
           target: ownership.ownedId,
           animated: true,
           label: `${ownership.ownershipName} ${ownership.ownershipPercentage}%`,
+          data: {
+            ownershipName: ownership.ownershipName,
+            ownershipPercentage: ownership.ownershipPercentage,
+          },
           markerStart: EdgeStyle1.markerStart,
           style: EdgeStyle1.style,
           type: "custom", // This is the name of the custom edge
