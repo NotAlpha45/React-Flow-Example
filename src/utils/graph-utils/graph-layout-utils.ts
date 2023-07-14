@@ -101,7 +101,7 @@ export class GraphLayoutUtils {
 
     graphLayout.setGraph(options);
 
-    // You need to set default node and edges, otherwise it may result in unexpected behaviour
+    // You need to set default node and edges for dagre, otherwise it may result in unexpected behaviour
     graphLayout.setDefaultEdgeLabel(() => ({}));
     graphLayout.setDefaultNodeLabel(() => ({}));
 
@@ -125,8 +125,6 @@ export class GraphLayoutUtils {
         sourcePosition: nodeSourcePosition,
         targetPosition: nodeTargetPosition,
       };
-
-      console.log(node.sourcePosition, node.targetPosition);
 
       return {
         ...node,

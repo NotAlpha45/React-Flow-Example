@@ -6,7 +6,6 @@ import {
   applyNodeChanges,
   EdgeChange,
   applyEdgeChanges,
-  OnNodesChange,
 } from "reactflow";
 import { initialEdges, initialNodes } from "../../dummy-data/nodes-edges";
 
