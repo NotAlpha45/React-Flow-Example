@@ -4,7 +4,7 @@ import Dagre from "@dagrejs/dagre";
 import {
   DefaultNodeStyle,
   SelectedNodeStyle1,
-} from "../../styles/graph-style-constants";
+} from "../../assets/styles/graph-style-constants";
 import { appStore } from "../../stores/redux-store";
 import { GraphSliceActions } from "../../stores/slices/graph-slice";
 
@@ -129,15 +129,11 @@ export class GraphLayoutUtils {
       return {
         ...node,
         position: {
-          x: repositionedNode.x * 4,
+          x: repositionedNode.x * 5,
           y: repositionedNode.y * 2,
         },
       };
     });
-
-    // console.log(repositionedNodes);
-
-    // console.log(repositionedNodes);
 
     return {
       nodes: repositionedNodes,

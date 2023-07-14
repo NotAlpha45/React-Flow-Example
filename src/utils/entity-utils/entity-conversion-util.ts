@@ -1,7 +1,7 @@
 import { defaultNodePosition } from "../../dummy-data/nodes-edges";
 import { appStore } from "../../stores/redux-store";
 import { GraphSliceActions } from "../../stores/slices/graph-slice";
-import { EdgeStyle1 } from "../../styles/graph-style-constants";
+import { EdgeStyle1 } from "../../assets/styles/graph-style-constants";
 import { Entity, OwnerShip } from "../../types/entity-types";
 import { Edge, Node } from "reactflow";
 
@@ -30,8 +30,9 @@ export class EntityConverter {
           target: ownership.ownedId,
           animated: true,
           label: `${ownership.ownershipName} ${ownership.ownershipPercentage}%`,
-          style: EdgeStyle1.style,
           markerStart: EdgeStyle1.markerStart,
+          style: EdgeStyle1.style,
+          type: "custom", // This is the name of the custom edge
         });
       });
     });
