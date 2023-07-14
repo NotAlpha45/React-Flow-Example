@@ -72,7 +72,7 @@ export const initialEntities: Entity[] = [
         ownerId: "3",
         ownedId: "4",
         ownershipName: "Entity 3",
-        ownershipPercentage: 100,
+        ownershipPercentage: 50,
       },
       {
         ownershipId: "4",

@@ -1,5 +1,5 @@
 import { Edge, MarkerType, Node } from "reactflow";
-import { EdgeStyle1 } from "../styles/graph-style-constants";
+import { EdgeStyle1 } from "../assets/styles/graph-style-constants";
 
 export const defaultNodePosition = { x: 0, y: 0 };
 
