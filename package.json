@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.0.2",
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@reactflow/node-resizer": "^2.1.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/jest": "^29.5.2",

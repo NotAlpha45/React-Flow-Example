@@ -54,9 +54,6 @@ export default function GraphComponent() {
                     <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { setSelectedLayout("TB") }}>Vertical Layout</button>
                     <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { setSelectedLayout("LR") }}>Horizontal Layout</button>
                     <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { setLayout() }}>Reset Layout</button>
-                    <button type='button' className='bg-white text-black m-2 border-black border-4' onClick={() => { GraphLayoutUtils.setDefaultNodeStyle() }}>Reset Selection</button>
-                    <button type='button' className='bg-white text-black m-2 border-yellow-300 border-4' onClick={() => { GraphSearchUtils.findNodesByOwnershipPercentage(50, "3"); }}>Select Nodes With 50% Ownership</button>
-                    <button type='button' className='bg-white text-black m-2 border-red-700 border-4' onClick={() => { GraphSearchUtils.findNodeByLabel("2", "contains") }}>Select Nodes Containing "2"</button>
                 </Panel>
                 <Controls className='bg-white text-black p-1 rounded-md' />
                 <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
