@@ -93,7 +93,7 @@ export default function GraphFilterFields() {
                             {
                                 entityNamesAndIds.map((entityNameAndId) => {
                                     return (
-                                        <Menu.Item>
+                                        <Menu.Item key={entityNameAndId.entityId}>
                                             {({ active }) => (
                                                 <a
                                                     onClick={() => handleEntitySelection(entityNameAndId.entityId, entityNameAndId.entityName)}
@@ -143,7 +143,7 @@ export default function GraphFilterFields() {
                                     {
                                         filterTypes.map((filterType) => {
                                             return (
-                                                <Menu.Item>
+                                                <Menu.Item key={filterType}>
                                                     {({ active }) => (
                                                         <a
                                                             onClick={() => handleFilterTypeSelection(filterType)}
