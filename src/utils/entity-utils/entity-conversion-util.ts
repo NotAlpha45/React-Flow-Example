@@ -1,7 +1,10 @@
 import { defaultNodePosition } from "../../dummy-data/nodes-edges";
 import { appStore } from "../../stores/redux-store";
 import { GraphSliceActions } from "../../stores/slices/graph-slice";
-import { EdgeStyle1 } from "../../assets/styles/graph-style-constants";
+import {
+  DefaultNodeStyle,
+  EdgeStyle1,
+} from "../../assets/styles/graph-style-constants";
 import { Entity, OwnerShip } from "../../types/entity-types";
 import { Edge, Node } from "reactflow";
 
@@ -17,6 +20,7 @@ export class EntityConverter {
           entity: entity,
         },
         position: defaultNodePosition,
+        style: DefaultNodeStyle,
       };
     });
 

@@ -33,10 +33,8 @@ export default function GraphComponent() {
 
         EntityConverter.convertEntitiesToGraph();
         setLayout();
-        GraphLayoutUtils.setDefaultNodeStyle();
-    }, [selectedLayout, reactFlowInstance])
 
-
+    }, [reactFlowInstance, selectedLayout])
 
 
     return (
