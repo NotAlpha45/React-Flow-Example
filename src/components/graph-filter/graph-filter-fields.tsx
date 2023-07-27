@@ -116,11 +116,11 @@ export default function GraphFilterFields() {
                 </Transition>
             </Menu>
             <div id="input-field" className="mt-2 flex ">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center py-1 justify-start">
 
                     <Menu as="div" className="flex text-left mr-2">
                         <div>
-                            <Menu.Button className="flex justify-between w-34 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            <Menu.Button className="flex justify-between w-40 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                 {
                                     selectedFilterType === "" ? "Select Filter Type" : `${selectedFilterType}`
                                 }
@@ -137,7 +137,7 @@ export default function GraphFilterFields() {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute z-10 mt-10 w-auto origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="absolute w-32 z-10 mt-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div className="py-1">
 
                                     {
