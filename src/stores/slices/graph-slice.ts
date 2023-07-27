@@ -51,25 +51,14 @@ const graphSlice = createSlice({
       state.nodes = action.payload;
     },
 
-    setEdges(state: GraphStateType, action: PayloadAction<Edge[]>) {
-      state.edges = action.payload;
+    setNodesAndEdges(
+      state: GraphStateType,
+      action: PayloadAction<{ nodes: Node[]; edges: Edge[] }>
+    ) {
+      state.nodes = action.payload.nodes;
+      state.edges = action.payload.edges;
     },
 
-    updateNodes(state: GraphStateType, action: PayloadAction<Node[]>) {
-      const newNodes = state.nodes.map((node) => {
-        const updatedNode = action.payload.find(
-          (updatedNode) => updatedNode.id === node.id
-        );
-
-        if (updatedNode) {
-          node = updatedNode;
-        }
-
-        return node;
-      });
-
-      state.nodes = newNodes;
-    },
     onNodesChange: (
       state: GraphStateType,
       action: PayloadAction<NodeChange[]>

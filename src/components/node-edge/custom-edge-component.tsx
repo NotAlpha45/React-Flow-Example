@@ -11,6 +11,7 @@ const CustomEdgeComponent: FunctionComponent<EdgeProps> = ({
     targetPosition,
     label,
     markerStart,
+    markerEnd,
     style
 }) => {
     const [edgePath, labelX, labelY] = getBezierPath({
@@ -28,6 +29,7 @@ const CustomEdgeComponent: FunctionComponent<EdgeProps> = ({
                 id={id}
                 path={edgePath}
                 markerStart={markerStart}
+                markerEnd={markerEnd}
                 style={style}
             />
             <EdgeLabelRenderer>

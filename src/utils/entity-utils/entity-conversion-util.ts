@@ -34,7 +34,8 @@ export class EntityConverter {
             ownershipName: ownership.ownershipName,
             ownershipPercentage: ownership.ownershipPercentage,
           },
-          markerStart: EdgeStyle1.markerStart,
+          // markerStart: EdgeStyle1.markerStart,
+          markerEnd: EdgeStyle1.markerEnd,
           style: EdgeStyle1.style,
           type: "custom", // This is the name of the custom edge
         });

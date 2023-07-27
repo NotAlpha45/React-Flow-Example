@@ -6,7 +6,6 @@ import { shallowEqual, useDispatch } from 'react-redux';
 import { GraphSliceActions } from '../../stores/slices/graph-slice';
 import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils';
 import { GraphControlUtils } from '../../utils/graph-utils/graph-control-utils';
-import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils';
 import { EntityConverter } from '../../utils/entity-utils/entity-conversion-util';
 import { customEdgeObject } from '../node-edge/custom-edge-object';
 
@@ -22,8 +21,7 @@ export default function GraphComponent() {
     const setLayout = () => {
         const { nodes: layoutedNodes, edges: layoutedEdges } = GraphLayoutUtils.dagreeLayoutMaker(nodes, edges, { rankdir: selectedLayout });
 
-        dispatch(GraphSliceActions.setNodes(layoutedNodes));
-        dispatch(GraphSliceActions.setEdges(layoutedEdges));
+        dispatch(GraphSliceActions.setNodesAndEdges({ nodes: layoutedNodes, edges: layoutedEdges }));
 
         window.requestAnimationFrame(() => {
             reactFlowInstance.fitView();

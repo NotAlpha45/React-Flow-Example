@@ -38,7 +38,7 @@ export default function GraphFilterFields() {
             return;
         }
 
-        if (selectedEntityId === "any (*)") {
+        if (selectedEntityId === "*") {
             GraphSearchUtils.findNodesByOwnershipPercentage(selectedOwnershipPercentage);
             return;
         }
@@ -52,7 +52,6 @@ export default function GraphFilterFields() {
         setSelectedOwnershipPercentage(0);
         GraphLayoutUtils.setDefaultNodeStyle();
     }
-
 
     return (
         <>
@@ -80,7 +79,7 @@ export default function GraphFilterFields() {
                             <Menu.Item>
                                 {({ active }) => (
                                     <a
-                                        onClick={() => handleEntitySelection("any (*)", "any (*)")}
+                                        onClick={() => handleEntitySelection("*", "Any")}
                                         className={classNames(
                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                             'block px-4 py-2 text-sm'
@@ -185,12 +184,15 @@ export default function GraphFilterFields() {
 
             <div id="button-groups" className='flex justify-between mt-2 space-x-2'>
 
-                <button className="text-center  w-32 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-500"
+                <button className="text-center  w-32 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-500 disabled:opacity-25"
                     onClick={handleApplyFilter}
+                    disabled={selectedEntityId === "" || selectedFilterType === "" || selectedOwnershipPercentage === 0}
                 >
                     Apply Filter
                 </button>
-                <button className="text-center  w-32 rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-green-500">
+                <button type='button' className="text-center  w-32 rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-green-500 disabled:opacity-25"
+                    disabled={selectedEntityId === "" || selectedFilterType === "" || selectedOwnershipPercentage === 0}
+                >
                     Save Filter
                 </button>
             </div>

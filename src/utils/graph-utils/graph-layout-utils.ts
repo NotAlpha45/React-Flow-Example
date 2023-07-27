@@ -1,4 +1,3 @@
-import { HierarchyPointNode, stratify, tree } from "d3-hierarchy";
 import { Node, Edge, Position } from "reactflow";
 import Dagre from "@dagrejs/dagre";
 import {
@@ -58,36 +57,7 @@ export class GraphLayoutUtils {
       return node;
     });
 
-    appStore.dispatch(GraphSliceActions.updateNodes(newNodes));
-  }
-
-  static d3LayoutMaker(nodes: Node[], edges: Edge[]) {
-    const graphLayout = tree();
-
-    if (nodes.length === 0) return { nodes, edges };
-
-    const { width, height } = document
-      ?.querySelector(`[data-id="${nodes[0].id}"]`)
-      ?.getBoundingClientRect() ?? { width: 0, height: 0 };
-
-    const hierarchy = stratify()
-      .id((node: any) => node.id)
-      .parentId(
-        (node: any) =>
-          edges.find((edge: any) => edge.target === node.id)?.source
-      );
-
-    const root = hierarchy(nodes);
-
-    const layout = graphLayout.nodeSize([width * 2, height * 2])(root);
-
-    return {
-      nodes: layout.descendants().map((node: HierarchyPointNode<any>) => ({
-        ...node.data,
-        position: { x: node.x, y: node.y },
-      })),
-      edges,
-    };
+    appStore.dispatch(GraphSliceActions.setNodes(newNodes));
   }
 
   static dagreeLayoutMaker(
