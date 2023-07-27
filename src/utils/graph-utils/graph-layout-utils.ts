@@ -100,7 +100,7 @@ export class GraphLayoutUtils {
         ...node,
         position: {
           x: repositionedNode.x * 5,
-          y: repositionedNode.y * 2,
+          y: repositionedNode.y * 3,
         },
       };
     });
