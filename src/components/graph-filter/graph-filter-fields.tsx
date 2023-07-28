@@ -70,8 +70,8 @@ export default function GraphFilterFields() {
     return (
         <>
             <Menu as="div" className="flex text-left">
-                <div>
-                    <Menu.Button className="flex w-64 justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                <div className='w-full'>
+                    <Menu.Button className="flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                         {
                             selectedEntityId === "" ? "Select Entity Company Name" : `${selectedEntityId} - ${selectedEntityName}`
                         }
@@ -88,7 +88,7 @@ export default function GraphFilterFields() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                    <Menu.Items className="absolute z-10 mt-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute z-10 mt-10 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1 justify-start">
                             <Menu.Item>
                                 {({ active }) => (
@@ -128,12 +128,12 @@ export default function GraphFilterFields() {
                     </Menu.Items>
                 </Transition>
             </Menu>
-            <div id="input-field" className="mt-2 flex ">
-                <div className="flex items-center py-1 justify-start">
+            <div id="input-field" className="mt-2 flex">
+                <div className="flex items-center py-1 justify-start w-full">
 
-                    <Menu as="div" className="flex text-left mr-2">
+                    <Menu as="div" className="flex text-left mr-2 ">
                         <div>
-                            <Menu.Button className="flex justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            <Menu.Button className="flex w-full justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                 {
                                     selectedFilterType === "" ? "Select Filter Type" : `${selectedFilterType}`
                                 }
@@ -150,7 +150,7 @@ export default function GraphFilterFields() {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute w-32 z-10 mt-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="absolute w-1/2 z-10 mt-10 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div className="py-1">
 
                                     {
@@ -180,7 +180,7 @@ export default function GraphFilterFields() {
                 </div>
                 <div className="flex items-center justify-between">
                     <input type="number"
-                        className="w-32 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                         placeholder="Share (%)"
                         onChange={(e) => handleOwnershipPercentageSelection(parseInt(e.target.value))}
                     />
