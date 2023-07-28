@@ -1,4 +1,5 @@
 import GraphFilterFields from "./graph-filter-fields";
+import GraphSavedFilterPanel from "./graph-saved-filter-panel";
 
 
 export default function GraphFilterLeftSidebar() {
@@ -20,6 +21,7 @@ export default function GraphFilterLeftSidebar() {
 
                     <li className="px-5 py-3 bg-gray-100">
                         <GraphFilterFields />
+                        <GraphSavedFilterPanel />
                     </li>
                 </ul>
             </aside>

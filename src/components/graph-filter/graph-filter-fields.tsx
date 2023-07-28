@@ -4,6 +4,10 @@ import React, { Fragment } from 'react'
 import { EntityControlUtils } from '../../utils/entity-utils/entity-control-utils'
 import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils'
 import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils'
+import { GraphFilterUtils } from '../../utils/graph-utils/graph-filter-utils'
+import { GraphFilterType } from '../../types/graph-saved-filter-types'
+import { useAppSelector } from '../../stores/redux-store'
+import { shallowEqual } from 'react-redux'
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -16,6 +20,7 @@ export default function GraphFilterFields() {
     const [selectedEntityName, setSelectedEntityName] = React.useState("");
     const [selectedFilterType, setSelectedFilterType] = React.useState("");
     const [selectedOwnershipPercentage, setSelectedOwnershipPercentage] = React.useState(0);
+    const savedFilter = useAppSelector(state => state.graphFilter, shallowEqual);
 
     const filterTypes = ["equals", "not equals", "contains", "not contains", "starts with", "ends with"]
 
@@ -45,12 +50,30 @@ export default function GraphFilterFields() {
         GraphSearchUtils.findNodesByOwnershipPercentage(selectedOwnershipPercentage, selectedEntityId);
     }
 
+    const handleSaveFilter = () => {
+
+        const selectedFilter: GraphFilterType = {
+            entityId: selectedEntityId,
+            entityName: selectedEntityName,
+            filterType: selectedFilterType,
+            sharePercentage: selectedOwnershipPercentage
+        }
+
+        GraphFilterUtils.saveFilter(selectedFilter);
+
+        console.log(savedFilter);
+
+
+    }
+
     const handleResetFilter = () => {
         setSelectedEntityId("");
         setSelectedEntityName("");
         setSelectedFilterType("");
         setSelectedOwnershipPercentage(0);
         GraphLayoutUtils.setDefaultNodeStyle();
+
+
     }
 
     return (
@@ -192,6 +215,7 @@ export default function GraphFilterFields() {
                 </button>
                 <button type='button' className="text-center  w-32 rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-green-500 disabled:opacity-25"
                     disabled={selectedEntityId === "" || selectedFilterType === "" || selectedOwnershipPercentage === 0}
+                    onClick={handleSaveFilter}
                 >
                     Save Filter
                 </button>
