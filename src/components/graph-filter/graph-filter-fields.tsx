@@ -133,7 +133,7 @@ export default function GraphFilterFields() {
 
                     <Menu as="div" className="flex text-left mr-2">
                         <div>
-                            <Menu.Button className="flex justify-between w-40 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            <Menu.Button className="flex justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                 {
                                     selectedFilterType === "" ? "Select Filter Type" : `${selectedFilterType}`
                                 }
