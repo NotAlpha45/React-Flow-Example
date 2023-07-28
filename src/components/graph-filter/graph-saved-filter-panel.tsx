@@ -21,7 +21,7 @@ export default function GraphSavedFilterPanel() {
                         {savedFilters.map((filter, index) => {
 
                             return (
-                                <div key={index} className='px-2 border-2 border-gray-600 rounded-lg mt-2 mb-3'>
+                                <div key={index} className='px-1 py-1'>
                                     <GraphSavedFilterCard {...filter} />
                                 </div>
                             )

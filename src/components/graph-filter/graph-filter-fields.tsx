@@ -6,8 +6,6 @@ import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils'
 import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils'
 import { GraphFilterUtils } from '../../utils/graph-utils/graph-filter-utils'
 import { GraphFilterType } from '../../types/graph-saved-filter-types'
-import { useAppSelector } from '../../stores/redux-store'
-import { shallowEqual } from 'react-redux'
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -20,8 +18,6 @@ export default function GraphFilterFields() {
     const [selectedEntityName, setSelectedEntityName] = React.useState("");
     const [selectedFilterType, setSelectedFilterType] = React.useState("");
     const [selectedOwnershipPercentage, setSelectedOwnershipPercentage] = React.useState(0);
-    const savedFilter = useAppSelector(state => state.graphFilter, shallowEqual);
-
     const filterTypes = ["equals", "not equals", "contains", "not contains", "starts with", "ends with"]
 
 
@@ -61,9 +57,6 @@ export default function GraphFilterFields() {
 
         GraphFilterUtils.saveFilter(selectedFilter);
 
-        console.log(savedFilter);
-
-
     }
 
     const handleResetFilter = () => {
@@ -72,8 +65,6 @@ export default function GraphFilterFields() {
         setSelectedFilterType("");
         setSelectedOwnershipPercentage(0);
         GraphLayoutUtils.setDefaultNodeStyle();
-
-
     }
 
     return (
