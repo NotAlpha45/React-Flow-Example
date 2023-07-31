@@ -10,13 +10,14 @@ import { Edge, Node } from "reactflow";
 
 export class EntityConverter {
   static convertEntitiesToGraph(
-    entities: Entity[] = appStore.getState().entity
+    entities: Entity[] = appStore.getState().entity.entities,
+    ownerships: OwnerShip[] = appStore.getState().entity.ownerships
   ) {
     const convertedNodes: Node[] = entities.map((entity: Entity) => {
       return {
-        id: entity.self.entityId,
+        id: entity.entityId,
         data: {
-          label: entity.self.entityName,
+          label: entity.entityName,
           entity: entity,
         },
         position: defaultNodePosition,
@@ -24,27 +25,42 @@ export class EntityConverter {
       };
     });
 
-    const convertedEdges: Edge[] = [];
-
-    entities.forEach((entity: Entity) => {
-      entity.ownerships.forEach((ownership: OwnerShip) => {
-        convertedEdges.push({
-          id: ownership.ownershipId,
-          source: ownership.ownerId,
-          target: ownership.ownedId,
-          animated: true,
-          label: `${ownership.ownershipName} ${ownership.ownershipPercentage}%`,
-          data: {
-            ownershipName: ownership.ownershipName,
-            ownershipPercentage: ownership.ownershipPercentage,
-          },
-          // markerStart: EdgeStyle1.markerStart,
-          markerEnd: EdgeStyle1.markerEnd,
-          style: EdgeStyle1.style,
-          type: "custom", // This is the name of the custom edge
-        });
-      });
+    const convertedEdges: Edge[] = ownerships.map((ownership: OwnerShip) => {
+      return {
+        id: ownership.ownershipId,
+        source: ownership.ownerId,
+        target: ownership.ownedId,
+        animated: true,
+        label: `${ownership.ownershipName} ${ownership.ownershipPercentage}%`,
+        data: {
+          ownershipName: ownership.ownershipName,
+          ownershipPercentage: ownership.ownershipPercentage,
+        },
+        markerEnd: EdgeStyle1.markerEnd,
+        style: EdgeStyle1.style,
+        type: "custom", // This is the name of the custom edge
+      };
     });
+
+    // entities.forEach((entity: Entity) => {
+    //   entity.ownerships.forEach((ownership: OwnerShip) => {
+    //     convertedEdges.push({
+    //       id: ownership.ownershipId,
+    //       source: ownership.ownerId,
+    //       target: ownership.ownedId,
+    //       animated: true,
+    //       label: `${ownership.ownershipName} ${ownership.ownershipPercentage}%`,
+    //       data: {
+    //         ownershipName: ownership.ownershipName,
+    //         ownershipPercentage: ownership.ownershipPercentage,
+    //       },
+    //       // markerStart: EdgeStyle1.markerStart,
+    //       markerEnd: EdgeStyle1.markerEnd,
+    //       style: EdgeStyle1.style,
+    //       type: "custom", // This is the name of the custom edge
+    //     });
+    //   });
+    // });
 
     appStore.dispatch(
       GraphSliceActions.addNewBulkConnections({

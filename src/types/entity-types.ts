@@ -7,13 +7,10 @@ export type OwnerShip = {
 };
 
 export type Entity = {
-  self: {
-    entityId: string;
-    entityName: string;
-    incorporationJurisdiction: string;
-    entityType: string;
-    subNational: string;
-    sicCode: string;
-  };
-  ownerships: OwnerShip[];
+  entityId: string;
+  entityName: string;
+  incorporationJurisdiction: string;
+  entityType: string;
+  subNational: string;
+  sicCode: string;
 };
