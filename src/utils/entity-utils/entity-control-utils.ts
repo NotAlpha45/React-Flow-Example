@@ -2,11 +2,13 @@ import { appStore } from "../../stores/redux-store";
 import { Entity } from "../../types/entity-types";
 
 export class EntityControlUtils {
-  static getEntityNamesAndIds(entities: Entity[] = appStore.getState().entity) {
+  static getEntityNamesAndIds(
+    entities: Entity[] = appStore.getState().entity.entities
+  ) {
     return entities.map((entity) => {
       return {
-        entityId: entity.self.entityId,
-        entityName: entity.self.entityName,
+        entityId: entity.entityId,
+        entityName: entity.entityName,
       };
     });
   }
