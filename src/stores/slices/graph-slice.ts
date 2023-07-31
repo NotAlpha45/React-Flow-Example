@@ -51,6 +51,10 @@ const graphSlice = createSlice({
       state.nodes = action.payload;
     },
 
+    setEdges(state: GraphStateType, action: PayloadAction<Edge[]>) {
+      state.edges = action.payload;
+    },
+
     setNodesAndEdges(
       state: GraphStateType,
       action: PayloadAction<{ nodes: Node[]; edges: Edge[] }>

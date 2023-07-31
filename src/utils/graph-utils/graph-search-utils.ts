@@ -1,4 +1,7 @@
-import { SelectedNodeStyle3 } from "../../assets/styles/graph-style-constants";
+import {
+  SelectedEdgeStyle1,
+  SelectedNodeStyle3,
+} from "../../assets/styles/graph-style-constants";
 import { GraphFilterNames } from "../../enums/graph-filter-type-enums";
 import { appStore } from "../../stores/redux-store";
 import { GraphLayoutUtils } from "./graph-layout-utils";
@@ -31,21 +34,27 @@ export class GraphSearchUtils {
     matchType: GraphFilterNames,
     parentNodeId?: string
   ): Node[] {
+    GraphLayoutUtils.setDefaultNodeEdgeStyle(); // Reset to default style to avoid overlapping styles
+
     switch (matchType) {
       case GraphFilterNames.PERCENTAGE_EQUALS:
         return this.findNodesEqualsToPercentage(percentageValue, parentNodeId);
+
       case GraphFilterNames.PERCENTAGE_NOT_EQUALS:
         return this.findNodesNotEqualsToPercentage(
           percentageValue,
           parentNodeId
         );
+
       case GraphFilterNames.PERCENTAGE_GREATER_THAN:
         return this.findNodesGreaterThanPercentage(
           percentageValue,
           parentNodeId
         );
+
       case GraphFilterNames.PERCENTAGE_LESS_THAN:
         return this.findNodesLessThanPercentage(percentageValue, parentNodeId);
+
       default:
         return [];
     }
@@ -83,6 +92,12 @@ export class GraphSearchUtils {
         return node;
       }
     });
+
+    GraphLayoutUtils.setBulkSelectedEdgeStyles(
+      selectedEdges,
+      edges,
+      SelectedEdgeStyle1
+    );
 
     GraphLayoutUtils.setBulkSelectedNodeStyles(
       selectedNodes,
@@ -126,6 +141,12 @@ export class GraphSearchUtils {
       }
     });
 
+    GraphLayoutUtils.setBulkSelectedEdgeStyles(
+      selectedEdges,
+      edges,
+      SelectedEdgeStyle1
+    );
+
     GraphLayoutUtils.setBulkSelectedNodeStyles(
       selectedNodes,
       nodes,
@@ -168,6 +189,12 @@ export class GraphSearchUtils {
       }
     });
 
+    GraphLayoutUtils.setBulkSelectedEdgeStyles(
+      selectedEdges,
+      edges,
+      SelectedEdgeStyle1
+    );
+
     GraphLayoutUtils.setBulkSelectedNodeStyles(
       selectedNodes,
       nodes,
@@ -209,6 +236,12 @@ export class GraphSearchUtils {
         return node;
       }
     });
+
+    GraphLayoutUtils.setBulkSelectedEdgeStyles(
+      selectedEdges,
+      edges,
+      SelectedEdgeStyle1
+    );
 
     GraphLayoutUtils.setBulkSelectedNodeStyles(
       selectedNodes,
@@ -256,6 +289,12 @@ export class GraphSearchUtils {
         return node;
       }
     });
+
+    GraphLayoutUtils.setBulkSelectedEdgeStyles(
+      selectedEdges,
+      edges,
+      SelectedEdgeStyle1
+    );
 
     GraphLayoutUtils.setBulkSelectedNodeStyles(
       selectedNodes,

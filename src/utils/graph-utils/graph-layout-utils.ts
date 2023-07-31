@@ -2,24 +2,38 @@ import { Node, Edge, Position } from "reactflow";
 import Dagre from "@dagrejs/dagre";
 import {
   DefaultNodeStyle,
+  EdgeStyle1,
+  SelectedEdgeStyle1,
   SelectedNodeStyle1,
 } from "../../assets/styles/graph-style-constants";
 import { appStore } from "../../stores/redux-store";
 import { GraphSliceActions } from "../../stores/slices/graph-slice";
 
 export class GraphLayoutUtils {
-  static setDefaultNodeStyle(
+  static setDefaultNodeEdgeStyle(
     nodes: Node[] = appStore.getState().graph.nodes,
-    style: {} = DefaultNodeStyle
+    edges: Edge[] = appStore.getState().graph.edges,
+    nodeStyle = DefaultNodeStyle,
+    edgeStyle = EdgeStyle1
   ) {
     const newNodes = nodes.map((node: Node) => {
       return {
         ...node,
-        style: style,
+        style: nodeStyle,
       };
     });
 
-    appStore.dispatch(GraphSliceActions.setNodes(newNodes));
+    const newEdges = edges.map((edge: Edge) => {
+      return {
+        ...edge,
+        style: edgeStyle.style,
+        markerEnd: edgeStyle.markerEnd,
+      };
+    });
+
+    appStore.dispatch(
+      GraphSliceActions.setNodesAndEdges({ nodes: newNodes, edges: newEdges })
+    );
   }
 
   static setSelectedNodeStyle(
@@ -44,13 +58,13 @@ export class GraphLayoutUtils {
   static setBulkSelectedNodeStyles(
     selectedNodes: Node[],
     nodes: Node[] = appStore.getState().graph.nodes,
-    style: {} = SelectedNodeStyle1
+    nodeStyle: {} = SelectedNodeStyle1
   ) {
     const newNodes = nodes.map((node: Node) => {
       if (selectedNodes.find((selectedNode) => selectedNode.id === node.id)) {
         return {
           ...node,
-          style: style,
+          style: nodeStyle,
         };
       }
 
@@ -58,6 +72,26 @@ export class GraphLayoutUtils {
     });
 
     appStore.dispatch(GraphSliceActions.setNodes(newNodes));
+  }
+
+  static setBulkSelectedEdgeStyles(
+    selectedEdges: Edge[],
+    edges: Edge[] = appStore.getState().graph.edges,
+    edgeStyle = SelectedEdgeStyle1
+  ) {
+    const newEdges = edges.map((edge: Edge) => {
+      if (selectedEdges.find((selectedEdge) => selectedEdge.id === edge.id)) {
+        return {
+          ...edge,
+          style: edgeStyle.style,
+          markerEnd: edgeStyle.markerEnd,
+        };
+      }
+
+      return edge;
+    });
+
+    appStore.dispatch(GraphSliceActions.setEdges(newEdges));
   }
 
   static dagreeLayoutMaker(

@@ -74,7 +74,7 @@ export default function GraphFilterFields() {
         setSelectedEntityName("");
         setSelectedFilterType(null);
         setSelectedOwnershipPercentage(0);
-        GraphLayoutUtils.setDefaultNodeStyle();
+        GraphLayoutUtils.setDefaultNodeEdgeStyle();
     }
 
     return (
