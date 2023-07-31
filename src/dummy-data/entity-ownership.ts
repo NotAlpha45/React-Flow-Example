@@ -43,6 +43,56 @@ export const initialOwnerships: OwnerShip[] = [
     ownershipName: "Entity 4",
     ownershipPercentage: 100,
   },
+  // Some more entity data in this format that have a non linear ownership structure with other entities
+  {
+    ownershipId: "6",
+    ownerId: "3",
+    ownedId: "6",
+    ownershipName: "Entity 3",
+    ownershipPercentage: 70,
+  },
+  {
+    ownershipId: "7",
+    ownerId: "master",
+    ownedId: "6",
+    ownershipName: "Master",
+    ownershipPercentage: 30,
+  },
+  {
+    ownershipId: "8",
+    ownerId: "6",
+    ownedId: "8",
+    ownershipName: "Entity 6",
+    ownershipPercentage: 100,
+  },
+  {
+    ownershipId: "9",
+    ownerId: "6",
+    ownedId: "9",
+    ownershipName: "Entity 6",
+    ownershipPercentage: 10,
+  },
+  {
+    ownershipId: "10",
+    ownerId: "9",
+    ownedId: "10",
+    ownershipName: "Entity 9",
+    ownershipPercentage: 100,
+  },
+  {
+    ownershipId: "11",
+    ownerId: "10",
+    ownedId: "11",
+    ownershipName: "Entity 10",
+    ownershipPercentage: 10,
+  },
+  {
+    ownershipId: "12",
+    ownerId: "8",
+    ownedId: "11",
+    ownershipName: "Entity 8",
+    ownershipPercentage: 20,
+  },
 ];
 
 export const initialEntities: Entity[] = [
@@ -89,6 +139,48 @@ export const initialEntities: Entity[] = [
   {
     entityId: "5",
     entityName: "Entity 5",
+    incorporationJurisdiction: "US",
+    entityType: "Corporation",
+    subNational: "US",
+    sicCode: "1234",
+  },
+  // Some more entity data in this format that have a non linear ownership structure with other entities
+  {
+    entityId: "6",
+    entityName: "Entity 6",
+    incorporationJurisdiction: "US",
+    entityType: "Corporation",
+    subNational: "US",
+    sicCode: "1234",
+  },
+  {
+    entityId: "8",
+    entityName: "Entity 8",
+    incorporationJurisdiction: "US",
+    entityType: "Corporation",
+    subNational: "US",
+    sicCode: "1234",
+  },
+  {
+    entityId: "9",
+    entityName: "Entity 9",
+    incorporationJurisdiction: "US",
+    entityType: "Corporation",
+    subNational: "US",
+    sicCode: "1234",
+  },
+
+  {
+    entityId: "10",
+    entityName: "Entity 10",
+    incorporationJurisdiction: "US",
+    entityType: "Corporation",
+    subNational: "US",
+    sicCode: "1234",
+  },
+  {
+    entityId: "11",
+    entityName: "Entity 11",
     incorporationJurisdiction: "US",
     entityType: "Corporation",
     subNational: "US",

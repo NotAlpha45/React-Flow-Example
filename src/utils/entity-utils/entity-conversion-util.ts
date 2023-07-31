@@ -8,6 +8,8 @@ import {
 import { Entity, OwnerShip } from "../../types/entity-types";
 import { Edge, Node } from "reactflow";
 
+// const defaultNodePosition = { x: 0, y: 0 };
+
 export class EntityConverter {
   static convertEntitiesToGraph(
     entities: Entity[] = appStore.getState().entity.entities,
