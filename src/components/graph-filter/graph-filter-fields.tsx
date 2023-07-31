@@ -7,6 +7,8 @@ import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils'
 import { GraphFilterUtils } from '../../utils/graph-utils/graph-filter-utils'
 import { GraphFilterType } from '../../types/graph-saved-filter-types'
 import { GraphFilterNames } from '../../enums/graph-filter-type-enums'
+import { GraphFilterNamesKeyType } from '../../types/graph-filter-types'
+
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -17,17 +19,16 @@ export default function GraphFilterFields() {
     const entityNamesAndIds = EntityControlUtils.getEntityNamesAndIds();
     const [selectedEntityId, setSelectedEntityId] = React.useState("");
     const [selectedEntityName, setSelectedEntityName] = React.useState("");
-    const [selectedFilterType, setSelectedFilterType] = React.useState("");
+    const [selectedFilterType, setSelectedFilterType] = React.useState<GraphFilterNamesKeyType | null>(null);
     const [selectedOwnershipPercentage, setSelectedOwnershipPercentage] = React.useState(0);
-    const filterTypes = Object.values(GraphFilterNames);
-
+    const filterTypesKeys = Object.keys(GraphFilterNames) as GraphFilterNamesKeyType[];
 
     const handleEntitySelection = (selectedEntityId: string, selectedEntityName: string) => {
         setSelectedEntityId(selectedEntityId);
         setSelectedEntityName(selectedEntityName);
     }
 
-    const handleFilterTypeSelection = (selectedFilterType: string) => {
+    const handleFilterTypeSelection = (selectedFilterType: GraphFilterNamesKeyType) => {
         setSelectedFilterType(selectedFilterType);
     }
 
@@ -36,23 +37,27 @@ export default function GraphFilterFields() {
     }
 
     const handleApplyFilter = () => {
-        if (selectedEntityId === "" || selectedFilterType === "" || selectedOwnershipPercentage === 0) {
+        if (selectedEntityId === "" || selectedFilterType === null || selectedOwnershipPercentage === 0) {
             return;
         }
 
         if (selectedEntityId === "*") {
-            GraphSearchUtils.findNodesByOwnershipPercentage(selectedOwnershipPercentage);
+            GraphSearchUtils.findNodesByPercentage(selectedOwnershipPercentage, GraphFilterNames[selectedFilterType]);
             return;
         }
-        GraphSearchUtils.findNodesByOwnershipPercentage(selectedOwnershipPercentage, selectedEntityId);
+        GraphSearchUtils.findNodesByPercentage(selectedOwnershipPercentage, GraphFilterNames[selectedFilterType], selectedEntityId);
     }
 
     const handleSaveFilter = () => {
 
+        if (selectedFilterType === null) {
+            return;
+        }
+
         const selectedFilter: GraphFilterType = {
             entityId: selectedEntityId,
             entityName: selectedEntityName,
-            filterType: selectedFilterType,
+            filterType: GraphFilterNames[selectedFilterType],
             sharePercentage: selectedOwnershipPercentage
         }
 
@@ -60,10 +65,14 @@ export default function GraphFilterFields() {
 
     }
 
+    const shouldDisableButton = () => {
+        return selectedEntityId === "" || selectedFilterType === null || selectedOwnershipPercentage === 0;
+    }
+
     const handleResetFilter = () => {
         setSelectedEntityId("");
         setSelectedEntityName("");
-        setSelectedFilterType("");
+        setSelectedFilterType(null);
         setSelectedOwnershipPercentage(0);
         GraphLayoutUtils.setDefaultNodeStyle();
     }
@@ -134,9 +143,9 @@ export default function GraphFilterFields() {
 
                     <Menu as="div" className="flex text-left mr-2 ">
                         <div>
-                            <Menu.Button className="flex w-40 text-left justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            <Menu.Button className="flex w-full text-left justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                 {
-                                    selectedFilterType === "" ? "Select Filter Type" : `${selectedFilterType}`
+                                    selectedFilterType === null ? "Select Filter Type" : `${GraphFilterNames[selectedFilterType]}`
                                 }
                                 <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                             </Menu.Button>
@@ -155,18 +164,18 @@ export default function GraphFilterFields() {
                                 <div className="py-1">
 
                                     {
-                                        filterTypes.map((filterType) => {
+                                        filterTypesKeys.map((filterTypesKey) => {
                                             return (
-                                                <Menu.Item key={filterType}>
+                                                <Menu.Item key={filterTypesKey}>
                                                     {({ active }) => (
                                                         <a
-                                                            onClick={() => handleFilterTypeSelection(filterType)}
+                                                            onClick={() => handleFilterTypeSelection(filterTypesKey)}
                                                             className={classNames(
                                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                 'block px-4 py-2 text-sm'
                                                             )}
                                                         >
-                                                            {filterType}
+                                                            {GraphFilterNames[filterTypesKey]}
                                                         </a>
                                                     )}
                                                 </Menu.Item>
@@ -179,11 +188,11 @@ export default function GraphFilterFields() {
                         </Transition>
                     </Menu>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between w-full">
                     <input type="number"
                         max={100}
                         min={0}
-                        className="rounded-md bg-white w-28 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        className="rounded-md bg-white w-full px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                         placeholder="Share (%)"
                         onChange={(e) => handleOwnershipPercentageSelection(parseInt(e.target.value))}
                     />
@@ -203,12 +212,12 @@ export default function GraphFilterFields() {
 
                 <button className="text-center  w-32 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-500 disabled:opacity-25"
                     onClick={handleApplyFilter}
-                    disabled={selectedEntityId === "" || selectedFilterType === "" || selectedOwnershipPercentage === 0}
+                    disabled={shouldDisableButton()}
                 >
                     Apply Filter
                 </button>
                 <button type='button' className="text-center  w-32 rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-green-500 disabled:opacity-25"
-                    disabled={selectedEntityId === "" || selectedFilterType === "" || selectedOwnershipPercentage === 0}
+                    disabled={shouldDisableButton()}
                     onClick={handleSaveFilter}
                 >
                     Save Filter
