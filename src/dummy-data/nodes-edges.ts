@@ -17,7 +17,7 @@ export const initialEdges = [
     source: "1",
     target: "2",
     animated: true,
-    style: EdgeStyle1.style,
+    style: EdgeStyle1.edgeLineStyle,
     markerStart: EdgeStyle1.markerStart,
   },
 ] as Edge[];

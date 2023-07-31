@@ -44,8 +44,27 @@ export const EdgeStyle1 = {
     height: 15,
     color: "#FF0072",
   },
-  style: {
+  edgeLineStyle: {
     strokeWidth: 2,
     stroke: "#FF0072",
+  },
+};
+
+export const SelectedEdgeStyle1 = {
+  markerEnd: {
+    type: MarkerType.ArrowClosed,
+    width: 15,
+    height: 15,
+    color: "#E1F714",
+  },
+  markerStart: {
+    type: MarkerType.ArrowClosed,
+    width: 15,
+    height: 15,
+    color: "#E1F714",
+  },
+  edgeLineStyle: {
+    strokeWidth: 2,
+    stroke: "#E1F714",
   },
 };

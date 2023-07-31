@@ -7,14 +7,16 @@ export default function GraphSavedFilterCard(props: GraphFilterType) {
     const handleApplyFilter = () => {
 
         if (props.entityId === "*") {
-            GraphSearchUtils.findNodesByOwnershipPercentage(
+            GraphSearchUtils.findNodesByPercentage(
                 props.sharePercentage,
+                props.filterType,
             )
             return;
         }
 
-        GraphSearchUtils.findNodesByOwnershipPercentage(
+        GraphSearchUtils.findNodesByPercentage(
             props.sharePercentage,
+            props.filterType,
             props.entityId,
         )
     }
