@@ -4,7 +4,10 @@ import { GraphFilterType } from "../../types/graph-saved-filter-types";
 
 export class GraphFilterUtils {
   static saveFilter(filter: GraphFilterType) {
-    console.log("Saving filter: ", filter);
     appStore.dispatch(GraphFilterSliceActions.addGraphFilter(filter));
+  }
+
+  static removeFilter(filter: GraphFilterType) {
+    appStore.dispatch(GraphFilterSliceActions.removeGraphFilter(filter));
   }
 }
