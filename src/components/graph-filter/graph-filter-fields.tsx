@@ -6,6 +6,7 @@ import { GraphSearchUtils } from '../../utils/graph-utils/graph-search-utils'
 import { GraphLayoutUtils } from '../../utils/graph-utils/graph-layout-utils'
 import { GraphFilterUtils } from '../../utils/graph-utils/graph-filter-utils'
 import { GraphFilterType } from '../../types/graph-saved-filter-types'
+import { GraphFilterNames } from '../../enums/graph-filter-type-enums'
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -18,7 +19,7 @@ export default function GraphFilterFields() {
     const [selectedEntityName, setSelectedEntityName] = React.useState("");
     const [selectedFilterType, setSelectedFilterType] = React.useState("");
     const [selectedOwnershipPercentage, setSelectedOwnershipPercentage] = React.useState(0);
-    const filterTypes = ["equals", "not equals", "contains", "not contains", "starts with", "ends with"]
+    const filterTypes = Object.values(GraphFilterNames);
 
 
     const handleEntitySelection = (selectedEntityId: string, selectedEntityName: string) => {
@@ -133,7 +134,7 @@ export default function GraphFilterFields() {
 
                     <Menu as="div" className="flex text-left mr-2 ">
                         <div>
-                            <Menu.Button className="flex w-full justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            <Menu.Button className="flex w-40 text-left justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                 {
                                     selectedFilterType === "" ? "Select Filter Type" : `${selectedFilterType}`
                                 }
@@ -180,7 +181,9 @@ export default function GraphFilterFields() {
                 </div>
                 <div className="flex items-center justify-between">
                     <input type="number"
-                        className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        max={100}
+                        min={0}
+                        className="rounded-md bg-white w-28 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                         placeholder="Share (%)"
                         onChange={(e) => handleOwnershipPercentageSelection(parseInt(e.target.value))}
                     />
