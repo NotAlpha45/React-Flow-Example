@@ -26,7 +26,7 @@ export class GraphLayoutUtils {
     const newEdges = edges.map((edge: Edge) => {
       return {
         ...edge,
-        style: edgeStyle.style,
+        style: edgeStyle.edgeLineStyle,
         markerEnd: edgeStyle.markerEnd,
       };
     });
@@ -83,7 +83,7 @@ export class GraphLayoutUtils {
       if (selectedEdges.find((selectedEdge) => selectedEdge.id === edge.id)) {
         return {
           ...edge,
-          style: edgeStyle.style,
+          style: edgeStyle.edgeLineStyle,
           markerEnd: edgeStyle.markerEnd,
         };
       }

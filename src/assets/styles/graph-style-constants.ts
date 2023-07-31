@@ -44,7 +44,7 @@ export const EdgeStyle1 = {
     height: 15,
     color: "#FF0072",
   },
-  style: {
+  edgeLineStyle: {
     strokeWidth: 2,
     stroke: "#FF0072",
   },
@@ -63,7 +63,7 @@ export const SelectedEdgeStyle1 = {
     height: 15,
     color: "#E1F714",
   },
-  style: {
+  edgeLineStyle: {
     strokeWidth: 2,
     stroke: "#E1F714",
   },

@@ -39,7 +39,7 @@ export class EntityConverter {
           ownershipPercentage: ownership.ownershipPercentage,
         },
         markerEnd: EdgeStyle1.markerEnd,
-        style: EdgeStyle1.style,
+        style: EdgeStyle1.edgeLineStyle,
         type: "custom", // This is the name of the custom edge
       };
     });
